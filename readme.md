@@ -14,6 +14,8 @@ or something for our future use like whenever we have to connect the database we
 
 apierror and apiresponse are also utils to standardize the errors and responses
 
-
+Models--------->
+Use schema from the mongoose 
+then we have some middlewares of express from which we can store encrypted passwords and all using bcrypt and we can use jwt to generate tokesn access tokens and refresh tokens
 
 
