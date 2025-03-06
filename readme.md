@@ -18,4 +18,9 @@ Models--------->
 Use schema from the mongoose 
 then we have some middlewares of express from which we can store encrypted passwords and all using bcrypt and we can use jwt to generate tokesn access tokens and refresh tokens
 
+File upload in backend(Multer)---------->
+create a middlewear or as a utility
+we can first store the file in our system using multer and then upload it to the cloud this is a commong practice followed by companies
+
+
 
