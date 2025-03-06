@@ -1,0 +1,52 @@
+HTTP crash course------------------------------------>
+
+so basic difference between http and https is that http is like sending
+normal data which is normally readable but https is like sending data
+in encrypted form which is normally not readable(in between)
+
+how to transfer text--------->
+
+URL , URI , URN (basically the location to do the communication)
+
+headers------------->
+
+metadata : key value pair send along with request and response(data about data)
+what header do???
+caching, authentication, manage state
+x-prefix was used before 2012
+types of headers???
+->request headers -------> from client
+->response headers ------> from server
+->representation headers ------> encoding/confession
+->payload headers -------> data
+
+Most common headers-------->
+
+Accept: application/json
+User: which agent
+Authorization : Bear_
+Content - types
+Cookie 
+Cache control
+
+=>>Cors headers and Security headers are also there
+
+HTTP methods-------------->
+
+GET : retrieve a resource
+PUT : replace a resource
+POST : interact with resource(mostly add resource)
+HEAD : no message body (response headers only like for user agents and all)
+OPTIONS : what operations are available
+TRACE : loopback test (get same data for debug and all)
+DELETE : remove a resource
+PATCH : change part of a resource
+
+HTTPS status code-------------->
+1xx informational
+2xx success
+3xx redirection
+4xx client error
+5xx server error
+
+++
