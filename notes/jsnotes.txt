@@ -20,4 +20,16 @@ objects
 type conversion---------->
 conversion of string to number will return NaN if its not a number "33"=>33 "22ab"=>NaN
 
+operations---------->
+2**2 is power symbol
+negvalue = -value (will get the negative of the value)
+
+stack and heap memory--------->
+stack(primitive types)
+we get a copy of variable in stack 
+heap(non primitive types)
+we get refference of variable in the head 
+
+array in js------------->
+
 
