@@ -1,0 +1,23 @@
+Not so common things about js
+
+console.table()
+console.table([here, we, can, give, multiple, variables])//this will display multiple variable as a table form
+
+"use strict"//for using all new syntax of js but currently everything by default runs in strict mode or new syntax
+
+documentations------->
+ecma script//defines the standard for js
+mdn//easy to read documentations
+
+datatypes---------->
+number 2 to power 53 or bigint 
+string => ""/''
+boolean => true/false
+null => standalone value/representation of empty value (typeof:object)
+symbol => unique
+objects 
+
+type conversion---------->
+conversion of string to number will return NaN if its not a number "33"=>33 "22ab"=>NaN
+
+

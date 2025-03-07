@@ -1,0 +1,11 @@
+Tokens--------->
+
+Access token----------->
+access tokens are short lived and suppose if we expire the login session in short duration then user have to input the password again 
+
+for that reason only we also have a refreshtoken
+
+Refresh token--------->
+a token which expires after long duration which is also saved in database so everytime we access token expries we compare the refresh token and if they are same then we give user a new access token
+
+
