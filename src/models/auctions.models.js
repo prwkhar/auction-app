@@ -5,64 +5,64 @@ const auctionSchema = new Schema(
     title: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     description: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
-      type: String, // Store the image URL (Cloudinary, S3, etc.)
-      required: true
+      type: String, // URL of the auction image (e.g., Cloudinary)
+      required: true,
     },
     startingBid: {
       type: Number,
       required: true,
-      min: 0
+      min: 0,
     },
     currentBid: {
       type: Number,
-      default: 0 // Will be updated as users place bids
+      default: 0,
     },
     startTime: {
       type: Date,
-      required: true
+      required: true,
     },
     endTime: {
       type: Date,
-      required: true
+      required: true,
     },
     auctioneer: {
       type: Schema.Types.ObjectId,
-      ref: "User", // Links to the user who is hosting this auction
-      required: true
+      ref: "User",
+      required: true,
     },
     bids: [
       {
         user: {
           type: Schema.Types.ObjectId,
-          ref: "User" // User who placed the bid
+          ref: "User",
         },
         amount: {
           type: Number,
-          required: true
+          required: true,
         },
         timestamp: {
           type: Date,
-          default: Date.now
-        }
-      }
+          default: Date.now,
+        },
+      },
     ],
     status: {
       type: String,
       enum: ["upcoming", "ongoing", "completed", "cancelled"],
-      default: "upcoming"
+      default: "upcoming",
     },
     winner: {
       type: Schema.Types.ObjectId,
-      ref: "User", // The winning bidder, set when the auction ends
-      default: null
-    }
+      ref: "User",
+      default: null,
+    },
   },
   { timestamps: true }
 );
