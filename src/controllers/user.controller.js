@@ -1,9 +1,9 @@
-import { asyncHandler } from "../utils/asyncHandler";
-import { apiError } from "../utils/apiError";
-import { User } from "../models/user.models";
-import cloudinary_uploader from "../utils/cloudinary";
-import { apiResponse } from "../utils/apiResponse";
-import { upload } from "../middlewares/multer.midlewares";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { apiError } from "../utils/apiError.js";
+import { User } from "../models/user.models.js";
+import cloudinary_uploader from "../utils/cloudinary.js";
+import { apiResponse } from "../utils/apiResponse.js";
+import { upload } from "../middlewares/multer.midlewares.js";
 import jwt from "jsonwebtoken";
 
 const generateAccessandRefreshTokens = async (userId) => {
