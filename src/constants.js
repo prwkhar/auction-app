@@ -1,1 +1,1 @@
-export const DB_NAME = "chai_backend"
+export const DB_NAME = "authentication-app"
