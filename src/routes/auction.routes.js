@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { hostAuction, getAuctions, getAuction, placeBid } from "../controllers/auction.controller.js";
-import { verifyJWT } from "../middlewares/auth.middlewares.js";
+import { verifyJWT } from "../middlewares/auth.midlewares.js";
 
 const router = Router();
 
