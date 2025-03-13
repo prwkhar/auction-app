@@ -78,4 +78,52 @@ const generateAccessandRefreshTokens = async (userId) => {
       .status(201)
       .json(new apiResponse(200, createduser, "user registered successfully"));
   });
-export {registerUser};
+
+  const loginUser = asyncHandler(async(req,res)=>{
+    const {username,password}    = req.body;
+    if(username==""||password=="")
+        res.json(new apiResponse(400,"username or password not given"));
+    //check if user exist
+    const user = await User.findOne({username:username});
+    if (!user) {
+        throw new apiError(400, "user not exist");
+      }
+    
+      const ispassvalid = await user.isPasswordCorrect(password);
+    
+      if (!ispassvalid) {
+        throw new apiError(401, "Invalid user credentials");
+      }
+    
+      const { accessToken, refreshToken } = await generateAccessandRefreshTokens(
+        user._id
+      );
+    
+      //sending to cookies
+      const loggedinuser = await User.findById(User._id).select(
+        "-password -refreshToken"
+      );
+    
+      //because of this its can only be modified from server
+      const options = {
+        httpOnly: true,
+        secure: true,
+      };
+    
+      return res
+        .status(200)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(
+          new apiResponse(
+            200,
+            {
+              user: loggedinuser,
+              accessToken,
+              refreshToken,
+            },
+            "user logged in successfully"
+          )
+        );
+  });
+export {registerUser,loginUser};

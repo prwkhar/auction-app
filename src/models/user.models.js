@@ -16,7 +16,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            lowecase: true,
+            lowercase: true,
             trim: true, 
         },
         fullName: {
@@ -25,32 +25,27 @@ const userSchema = new Schema(
             trim: true, 
             index: true
         },
-        // avatar: {
-        //     type: String, // cloudinary url
-        //     required: true,
-        // },
-        // coverImage: {
-        //     type: String, // cloudinary url
-        // },
-        // watchHistory: [
-        //     {
-        //         type: Schema.Types.ObjectId,
-        //         ref: "Video"
-        //     }
-        // ],
         password: {
             type: String,
             required: [true, 'Password is required']
         },
         refreshToken: {
             type: String
-        }
-
+        },
+        role: {
+            type: String,
+            enum: ["user", "auctioneer"], // "auctioneer" is the person who hosts auctions
+            default: "user"
+        },
+        hostedAuctions: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Auction" // Reference to the auctions hosted by this user
+            }
+        ]
     },
-    {
-        timestamps: true
-    }
-)
+    { timestamps: true }
+);
 
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
