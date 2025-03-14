@@ -1,31 +1,51 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const HostAuction = () => {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [image, setImage] = useState('')
-  const [startingBid, setStartingBid] = useState(0)
-  const [startTime, setStartTime] = useState('')
-  const [endTime, setEndTime] = useState('')
-  const navigate = useNavigate()
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState(null);
+  const [startingBid, setStartingBid] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const navigate = useNavigate();
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]); // Store the file object
+  };
 
   const handleHostAuction = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const accessToken = localStorage.getItem('accessToken')
+      const accessToken = localStorage.getItem('accessToken');
+
+      // Create FormData object
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('image', image); // File upload
+      formData.append('startingBid', startingBid);
+      formData.append('startTime', startTime);
+      formData.append('endTime', endTime);
+
       const res = await axios.post('http://localhost:8000/api/v1/auctions/host', 
-        { title, description, image, startingBid, startTime, endTime },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      )
-      alert('Auction hosted successfully!')
-      navigate(`/auction/${res.data.data._id}`)
+        formData,
+        { 
+          headers: { 
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'multipart/form-data' // Important for file upload
+          } 
+        }
+      );
+
+      alert('Auction hosted successfully!');
+      navigate(`/auction/${res.data.data._id}`);
     } catch (err) {
-      console.error(err)
-      alert('Failed to host auction')
+      console.error(err);
+      alert('Failed to host auction');
     }
-  }
+  };
 
   return (
     <div className="container mx-auto p-4 max-w-lg">
@@ -45,10 +65,9 @@ const HostAuction = () => {
           className="border p-2 mb-2" 
         />
         <input 
-          type="text" 
-          placeholder="Image URL" 
-          value={image} 
-          onChange={(e) => setImage(e.target.value)} 
+          type="file" 
+          accept="image/*" 
+          onChange={handleImageChange} 
           className="border p-2 mb-2" 
         />
         <input 
@@ -75,7 +94,7 @@ const HostAuction = () => {
         <button type="submit" className="bg-blue-500 text-white p-2">Host Auction</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default HostAuction
+export default HostAuction;

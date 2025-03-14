@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom'
-import React from 'react'
-
+import React, { useState ,useEffect } from 'react'
 const AuctionCard = ({ auction }) => {
-  const lastBid = auction.bids && auction.bids.length > 0
-    ? auction.bids[auction.bids.length - 1]
-    : null
+  const [lastBid, setLastBid] = useState(null);
+
+  useEffect(() => {
+    if (auction?.bids?.length > 0) {
+      setLastBid(auction.bids[auction.bids.length - 1]);
+    } else {
+      setLastBid(null);
+    }
+  }, [auction]); // Runs whenever auction changes
 
   return (
     <div className="border p-4 rounded shadow hover:shadow-lg transition">
