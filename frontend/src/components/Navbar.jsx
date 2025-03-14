@@ -20,7 +20,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-gray-800 text-white p-4 rounded-2xl mt-3 w-700px">
+    <nav className="bg-gray-800 text-white p-4 w-700px">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <Link to="/" className="font-bold text-xl">Auction App</Link>
