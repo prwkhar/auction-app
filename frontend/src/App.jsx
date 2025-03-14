@@ -8,8 +8,11 @@ import Navbar from './components/Navbar'
 
 function App() {
   return (
-    <div>
+    <div className="relative min-h-screen">
       <Navbar />
+      {/* Background covering full scrollable area */}
+      <div className="fixed top-0 left-0 w-full min-h-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px] z-[-2]"></div>
+
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
@@ -18,7 +21,8 @@ function App() {
         <Route path="/auction/:id" element={<AuctionDetail />} />
       </Routes>
     </div>
-  )
+  );
 }
+
 
 export default App

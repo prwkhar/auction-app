@@ -48,50 +48,50 @@ const HostAuction = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-lg">
-      <h1 className="text-2xl font-bold mb-4">Host Auction</h1>
+    <div className="bg-green-600/50 rounded-2xl mt-10 mx-auto p-4 max-w-md text-white">
+      <h1 className="text-2xl font-bold mb-5">Host Auction</h1>
       <form onSubmit={handleHostAuction} className="flex flex-col">
         <input 
           type="text" 
           placeholder="Title" 
           value={title} 
           onChange={(e) => setTitle(e.target.value)} 
-          className="border p-2 mb-2" 
+          className="border p-2 mb-2 rounded-2xl" 
         />
         <textarea 
           placeholder="Description" 
           value={description} 
           onChange={(e) => setDescription(e.target.value)} 
-          className="border p-2 mb-2" 
+          className="border p-2 mb-2 rounded-2xl" 
         />
         <input 
           type="file" 
           accept="image/*" 
           onChange={handleImageChange} 
-          className="border p-2 mb-2" 
+          className="border p-2 mb-2 rounded-2xl" 
         />
         <input 
           type="number" 
           placeholder="Starting Bid" 
           value={startingBid} 
           onChange={(e) => setStartingBid(Number(e.target.value))} 
-          className="border p-2 mb-2" 
+          className="border p-2 mb-2 rounded-2xl" 
         />
         <input 
           type="datetime-local" 
           placeholder="Start Time" 
           value={startTime} 
           onChange={(e) => setStartTime(e.target.value)} 
-          className="border p-2 mb-2" 
+          className="border p-2 mb-2 rounded-2xl" 
         />
         <input 
           type="datetime-local" 
           placeholder="End Time" 
           value={endTime} 
           onChange={(e) => setEndTime(e.target.value)} 
-          className="border p-2 mb-2" 
+          className="border p-2 mb-2 rounded-2xl" 
         />
-        <button type="submit" className="bg-blue-500 text-white p-2">Host Auction</button>
+        <button type="submit" className="bg-green-500 hover:bg-green-600 rounded-2xl mt-4 text-white p-2">Host Auction</button>
       </form>
     </div>
   );

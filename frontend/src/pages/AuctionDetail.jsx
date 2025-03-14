@@ -60,17 +60,17 @@ const AuctionDetail = () => {
   if (!auction) return <div className="container mx-auto p-4">Loading...</div>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold">{auction.title}</h1>
-      <img src={auction.image} alt={auction.title} className="w-full h-64 object-cover mt-4" />
-      <p className="mt-4">{auction.description}</p>
-      <p className="mt-2">Starting Bid: ${auction.startingBid}</p>
-      <p className="mt-2">Current Bid: ${auction.currentBid}</p>
+    <div className="bg-green-600/50 rounded-2xl mt-10 m-5 p-4 w-800px">
+      <h1 className="text-2xl font-bold text-amber-50">{auction.title}</h1>
+      <img src={auction.image} alt={auction.title} className="w-fit h-64 object-cover mt-4 border-2 border-amber-50" />
+      <p className="mt-4 text-white">{auction.description}</p>
+      <p className="mt-2 text-amber-300">Starting Bid: ${auction.startingBid}</p>
+      <p className="mt-2 text-amber-300">Current Bid: ${auction.currentBid}</p>
 
       {lastBid && <p className="mt-2 text-sm text-gray-600">Last bid by: {lastBid}</p>}
       
       {auction.status === 'completed' && auction.winner && (
-        <p className="mt-2 text-green-600">Winner: {auction.winner.username}</p>
+        <p className="mt-2 text-amber-300-600">Winner: {auction.winner.username}</p>
       )}
       
       <div className="mt-4">
@@ -79,9 +79,9 @@ const AuctionDetail = () => {
           placeholder="Your bid" 
           value={bidAmount} 
           onChange={(e) => setBidAmount(Number(e.target.value))} 
-          className="border p-2" 
+          className="border p-2 text-white" 
         />
-        <button onClick={handlePlaceBid} className="bg-green-500 text-white p-2 ml-2">Place Bid</button>
+        <button onClick={handlePlaceBid} className="bg-green-500 text-white p-2 ml-2 rounded-2xl hover:bg-green-700">Place Bid</button>
       </div>
     </div>
   );
