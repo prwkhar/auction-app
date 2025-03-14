@@ -1,26 +1,35 @@
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import React from 'react'
 
 const Navbar = () => {
   const navigate = useNavigate()
-  
-  const handleLogout = () => {
-    // Optionally call your backend logout endpoint.
-    // For simplicity, we just remove the token.
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:8000/api/v1/users/logout', null, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+      })
+    } catch (error) {
+      console.error("Logout error", error)
+    }
     localStorage.removeItem('accessToken')
-    navigate('/')
+    localStorage.removeItem('user')
+    navigate('/login')
   }
 
   return (
     <nav className="bg-gray-800 text-white p-4">
-      <div className="container mx-auto flex justify-between">
-        <div>
-          <Link to="/" className="mr-4">Home</Link>
-          <Link to="/host" className="mr-4">Host Auction</Link>
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="flex items-center space-x-4">
+          <Link to="/" className="font-bold text-xl">Auction App</Link>
+          <Link to="/" className="hover:underline">Dashboard</Link>
+          <Link to="/host" className="hover:underline">Host Auction</Link>
         </div>
-        <div>
-          <Link to="/login" className="mr-4">Login</Link>
-          <Link to="/register" className="mr-4">Register</Link>
+        <div className="flex items-center space-x-4">
+          <Link to="/login" className="hover:underline">Login</Link>
+          <Link to="/register" className="hover:underline">Register</Link>
           <button onClick={handleLogout} className="bg-red-500 px-3 py-1 rounded">Logout</button>
         </div>
       </div>

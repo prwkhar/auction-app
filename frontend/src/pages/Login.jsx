@@ -12,9 +12,11 @@ const Login = () => {
     try {
       const res = await axios.post('http://localhost:8000/api/v1/users/login', 
         { username, password },
-        { withCredentials: true } // ensures cookies are sent if needed
+        { withCredentials: true }
       )
-      localStorage.setItem('accessToken', res.data.data.accessToken)
+      const { accessToken, user } = res.data.data
+      localStorage.setItem('accessToken', accessToken)
+      localStorage.setItem('user', JSON.stringify(user))
       navigate('/')
     } catch (err) {
       console.error(err)

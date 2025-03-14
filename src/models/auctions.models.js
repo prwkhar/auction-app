@@ -12,7 +12,7 @@ const auctionSchema = new Schema(
       required: true,
     },
     image: {
-      type: String, // URL of the auction image (e.g., Cloudinary)
+      type: String,
       required: true,
     },
     startingBid: {

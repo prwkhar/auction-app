@@ -16,18 +16,14 @@ connectDb()
       },
     });
 
-    // Make Socket.IO instance available to controllers via app.locals
     app.locals.io = io;
 
     io.on("connection", (socket) => {
       console.log(`Socket connected: ${socket.id}`);
-
-      // Allow clients to join specific auction rooms
       socket.on("joinAuction", (auctionId) => {
         socket.join(auctionId);
         console.log(`Socket ${socket.id} joined auction ${auctionId}`);
       });
-
       socket.on("disconnect", () => {
         console.log(`Socket disconnected: ${socket.id}`);
       });
