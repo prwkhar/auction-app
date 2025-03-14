@@ -33,9 +33,9 @@ const Dashboard = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
       <div className="mb-4 bg-blue-900 p-3 rounded-2xl">
-        <button onClick={() => setActiveTab('available')} className={`mr-2 hover:rotate-30 duration-75 p-2 ${activeTab === 'available' ? 'text-amber-300' : 'text-white'}`}>Available Auctions</button>
-        <button onClick={() => setActiveTab('my')} className={`mr-2 hover:rotate-30 duration-75 p-2 ${activeTab === 'my' ? 'text-amber-300' : 'text-white'}`}>My Auctions</button>
-        <button onClick={() => setActiveTab('history')} className={`mr-2 p-2 hover:rotate-30 duration-75 ${activeTab === 'history' ? 'text-amber-300' : 'text-white'}`}>Auction History</button>
+        <button onClick={() => setActiveTab('available')} className={`mr-2 hover:underline duration-75 p-2 ${activeTab === 'available' ? 'text-amber-300' : 'text-white'}`}>Available Auctions</button>
+        <button onClick={() => setActiveTab('my')} className={`mr-2 hover:underline duration-75 p-2 ${activeTab === 'my' ? 'text-amber-300' : 'text-white'}`}>My Auctions</button>
+        <button onClick={() => setActiveTab('history')} className={`mr-2 p-2 hover:underline duration-75 ${activeTab === 'history' ? 'text-amber-300' : 'text-white'}`}>Auction History</button>
       </div>
       {activeTab === 'available' && (
         <div className="grid bg-green-400/50 rounded-2xl p-3 grid-cols-1 md:grid-cols-3 gap-4">
