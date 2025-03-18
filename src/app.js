@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(cors({
-  origin: "https://auction-app-frontend-virid.vercel.app", // Allow entire frontend domain
+  origin: `${process.env.CORS_ORIGIN}`, // Allow entire frontend domain
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
