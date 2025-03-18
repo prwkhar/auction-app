@@ -61,8 +61,7 @@ const logoutUser = asyncHandler(async (req, res) => {
   const token = req.cookies.refreshToken;
   if (!token) throw new apiError(400, "No refresh token provided");
   const user = await User.findOne({ refreshToken: token });
-  if (!user) throw 
-  new apiError(400, "Invalid token");
+  if (!user) throw new apiError(400, "Invalid token");
   user.refreshToken = null;
   await user.save({ validateBeforeSave: false });
   return res
