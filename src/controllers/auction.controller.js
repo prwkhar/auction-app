@@ -26,20 +26,25 @@ const hostAuction = asyncHandler(async (req, res) => {
   // Delete the local file after successful upload
   fs.unlinkSync(filePath);
 
+  // Convert startTime and endTime to UTC before saving
+  const startTimeUTC = new Date(startTime).toISOString();
+  const endTimeUTC = new Date(endTime).toISOString();
+
   const auction = await Auction.create({
     title,
     description,
     image: uploadResponse.secure_url, // Cloudinary URL
     startingBid,
     currentBid: startingBid,
-    startTime,
-    endTime,
+    startTime: startTimeUTC,
+    endTime: endTimeUTC,
     auctioneer: auctioneerId,
     status: "upcoming",
   });
 
   return res.status(201).json(new apiResponse(201, auction, "Auction hosted successfully"));
 });
+
 
 const getAuctions = asyncHandler(async (req, res) => {
   let auctions = await Auction.find()
@@ -49,8 +54,8 @@ const getAuctions = asyncHandler(async (req, res) => {
 
   const now = new Date();
   auctions = auctions.map(auction => {
-    const start = new Date(auction.startTime);
-    const end = new Date(auction.endTime);
+    const start = new Date(auction.startTime).toISOString();
+    const end = new Date(auction.endTime).toISOString();
     if (now < start) {
       auction.status = "upcoming";
     } else if (now >= start && now <= end) {
