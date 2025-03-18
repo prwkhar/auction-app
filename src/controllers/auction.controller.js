@@ -86,9 +86,9 @@ const getAuction = asyncHandler(async (req, res) => {
   const end = new Date(auction.endTime);
   if (now < start) {
     auction.status = "upcoming";
-  } else if (now >= start && now <= end) {
+  } else if (now >= start && now <end) {
     auction.status = "ongoing";
-  } else if (now > end) {
+  } else if (now >= end) {
     auction.status = "completed";
     if (auction.bids.length > 0 && !auction.winner) {
       auction.winner = auction.bids[auction.bids.length - 1].user;
