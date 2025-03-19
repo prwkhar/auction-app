@@ -50,8 +50,8 @@ const getAuctions = asyncHandler(async (req, res) => {
     .populate("winner", "username");
 
   const now = new Date();
+  const io = req.app.locals.io; // Get socket.io instance
 
-  // Update status and save to DB if changed
   await Promise.all(auctions.map(async (auction) => {
     const start = new Date(auction.startTime);
     const end = new Date(auction.endTime);
@@ -71,6 +71,14 @@ const getAuctions = asyncHandler(async (req, res) => {
     if (updatedStatus !== auction.status) {
       auction.status = updatedStatus;
       await auction.save(); // Save updated status
+
+      // 🔥 Emit status update event
+      if (io) {
+        io.emit("auctionStatusUpdate", {
+          auctionId: auction._id,
+          status: updatedStatus,
+        });
+      }
     }
   }));
 
@@ -103,9 +111,18 @@ const getAuction = asyncHandler(async (req, res) => {
     }
   }
 
+  const io = req.app.locals.io;
   if (updatedStatus !== auction.status) {
     auction.status = updatedStatus;
     await auction.save(); // Save updated status
+
+    // 🔥 Emit status update event
+    if (io) {
+      io.emit("auctionStatusUpdate", {
+        auctionId: auction._id,
+        status: updatedStatus,
+      });
+    }
   }
 
   return res.status(200).json(new apiResponse(200, auction, "Auction fetched successfully"));
@@ -132,7 +149,6 @@ const placeBid = asyncHandler(async (req, res) => {
   const io = req.app.locals.io;
   console.log("Socket.io instance:", io); // Debugging line
   if (io) {
-
     io.to(auctionId.toString()).emit("bidUpdate", {
       auctionId,
       currentBid: auction.currentBid,
