@@ -17,6 +17,7 @@ connectDb()
     });
 
     app.locals.io = io;
+    console.log("Socket.io stored in app.locals:", app.locals.io);
 
     io.on("connection", (socket) => {
       console.log(`Socket connected: ${socket.id}`);

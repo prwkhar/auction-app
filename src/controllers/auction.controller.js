@@ -130,7 +130,9 @@ const placeBid = asyncHandler(async (req, res) => {
   await auction.save();
 
   const io = req.app.locals.io;
+  console.log("Socket.io instance:", io); // Debugging line
   if (io) {
+
     io.to(auctionId.toString()).emit("bidUpdate", {
       auctionId,
       currentBid: auction.currentBid,
